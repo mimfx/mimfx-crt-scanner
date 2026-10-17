@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MIM FX | CRT Scanner</title>
+<style>
+:root{--bg:#fff;--ink:#111;--muted:#686868;--line:#e5e5e5;--soft:#f6f6f6;--green:#167a50}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,-apple-system,Arial,sans-serif}
+header{border-bottom:1px solid var(--line);padding:18px clamp(16px,4vw,48px);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-weight:850;letter-spacing:1.4px}.brand span{color:var(--green)}.status{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px}.dot{width:8px;height:8px;background:#b7791f;border-radius:50%}
+main{max-width:1180px;margin:auto;padding:28px 16px 60px}.eyebrow{font-size:11px;letter-spacing:2px;color:var(--green);font-weight:800}.intro{display:flex;justify-content:space-between;align-items:end;gap:20px;margin:10px 0 24px;flex-wrap:wrap}h1{font-size:clamp(28px,5vw,42px);letter-spacing:-1.4px;line-height:1.08;margin:6px 0 10px}.sub{color:var(--muted);max-width:600px;margin:0}.panel{border:1px solid var(--line);border-radius:14px;padding:18px;margin:16px 0}.controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}select,input{width:100%;padding:12px;border:1px solid var(--line);border-radius:8px;background:white;color:var(--ink);font:inherit}button{border:0;border-radius:8px;background:#111;color:white;padding:13px 18px;font-weight:750;font:inherit;cursor:pointer}button:disabled{opacity:.5;cursor:wait}.primary{background:var(--green)}.full{width:100%;margin-top:14px}.small{font-size:12px;color:var(--muted)}.sectionhead{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:28px 0 12px}.sectionhead h2{font-size:19px;margin:0}.badge{font-size:11px;border:1px solid var(--line);padding:4px 8px;border-radius:20px;color:var(--muted)}.notice{padding:14px;border-radius:9px;background:var(--soft);border:1px solid var(--line);color:#454545;font-size:13px}.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}.result{border:1px solid var(--line);border-radius:12px;padding:15px}.result h3{margin:0 0 4px}.result p{margin:5px 0;color:var(--muted);font-size:13px}.tag{display:inline-block;border:1px solid var(--line);border-radius:5px;padding:3px 7px;font-size:11px;margin:4px 4px 0 0}.empty{text-align:center;padding:28px 12px;color:var(--muted);border:1px dashed #ccc;border-radius:12px}.chart{margin-top:12px;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:white}.chart svg{display:block;width:100%;height:auto}.footer{margin-top:35px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}@media(max-width:600px){.controls{grid-template-columns:1fr}.intro{align-items:start}header{align-items:flex-start;flex-direction:column}.panel{padding:14px}}
+</style>
+</head>
+<body>
+<header><div class="brand">MIM <span>FX</span> <span style="color:#111">/ CRT SCANNER</span></div><div class="status"><i class="dot"></i><span id="connection">Backend not configured</span></div></header>
+<main>
+<div class="eyebrow">CRT × MSNR · MARKET SCANNER</div>
+<div class="intro"><div><h1>Quality setups.<br>Nothing forced.</h1><p class="sub">Scan for Candle Range Theory setups with body-close market structure confirmation and rejection from defined MSNR key levels.</p></div><span class="badge">FXCM · DERIV DATA PLANNED</span></div>
+<div class="panel">
+<div class="controls">
+<div><label for="backend">Backend URL</label><input id="backend" type="url" placeholder="https://your-service.onrender.com"></div>
+<div><label for="market">Market source</label><select id="market"><option value="fxcm">FXCM · Forex / supported CFDs</option><option value="deriv">Deriv · Synthetic indices</option></select></div>
+<div><label for="tf">CRT timeframe</label><select id="tf"><option>Weekly</option><option selected>Daily</option><option>H4</option></select></div>
+</div>
+<button class="primary full" id="scan">Scan for market</button>
+<p class="small">Backend URL is saved only in this browser. Scan results appear only when the connected backend supplies verified market data.</p>
+</div>
+<div class="sectionhead"><h2>Scan results</h2><span class="badge" id="count">0 setups</span></div>
+<div id="results" class="empty">No verified scan yet. Connect a working market-data backend, then tap Scan for market.</div>
+<div class="sectionhead"><h2>Quality rules</h2><span class="badge">Body-close BOS required</span></div>
+<div class="results">
+<div class="result"><h3>Weekly CRT</h3><p>Requires a Daily body-close break of structure.</p><span class="tag">D1 BOS</span><span class="tag">MSNR rejection</span></div>
+<div class="result"><h3>Daily CRT</h3><p>Requires H4 body-close BOS. H2 and H1 are additional confirmation checks.</p><span class="tag">H4 BOS</span><span class="tag">H2 / H1 quality</span></div>
+<div class="result"><h3>H4 CRT</h3><p>Requires a body-close BOS on H1, M30, or M15.</p><span class="tag">H1 / M30 / M15</span></div>
+</div>
+<div class="panel"><h3 style="margin-top:0">MSNR key levels</h3><p class="small">A-shape · V-shape · OCL · Fair Value Gap · Imbalance · QM · Failed QM · SBR · RBS</p><p class="small">Chart style: white background, grey bullish candles, black bearish candles, black borders and wicks.</p></div>
+<div class="footer">MIM FX · Analysis tool only. No entry, stop-loss or take-profit instructions. Market data and signals are not available until a real provider connection is configured. Never treat unavailable data as a signal.</div>
+</main>
+<script>
+const backend=document.querySelector('#backend'), scan=document.querySelector('#scan'), results=document.querySelector('#results'), connection=document.querySelector('#connection'), count=document.querySelector('#count');
+backend.value=localStorage.getItem('mimfx-backend')||'';
+async function check(){const base=backend.value.trim().replace(/\/$/,'');if(!base){connection.textContent='Backend not configured';return}try{const r=await fetch(base+'/health');if(!r.ok)throw Error();connection.textContent='Backend reachable'}catch(e){connection.textContent='Backend unavailable'}}
+backend.addEventListener('change',()=>{localStorage.setItem('mimfx-backend',backend.value.trim());check()});
+scan.addEventListener('click',async()=>{const base=backend.value.trim().replace(/\/$/,'');if(!base){results.className='notice';results.textContent='Enter your Render backend URL first. Example: https://mimfx-crt-analyzer.onrender.com';return}scan.disabled=true;scan.textContent='Checking data…';results.className='notice';results.textContent='Checking backend and live market-data status…';try{const r=await fetch(base+'/api/markets');const data=await r.json();if(!r.ok||!data.connected){results.className='notice';results.textContent=data.message||'Live market data is not configured. No signals generated.';count.textContent='0 setups';}else{results.className='empty';results.textContent='Market data is connected, but scan output is not yet available from this backend. No signals generated.';count.textContent='0 setups';}}catch(e){results.className='notice';results.textContent='Cannot reach the backend. Check the Render URL and service status.';count.textContent='0 setups'}finally{scan.disabled=false;scan.textContent='Scan for market';check()}});
+check();
+</script>
+</body></html>
